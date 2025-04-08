@@ -1,5 +1,9 @@
 # GC25 Project Documentation
 
+## Deployment Link
+
+[http://52.66.116.15/](http://52.66.116.15/)
+
 ## Overview
 
 GC25 is a comprehensive system with multiple backend services communicating through gRPC. The project is designed for scheduling meetings, generating reports, handling chat functionality, and managing updates through an asynchronous architecture.
@@ -66,7 +70,7 @@ Handles system updates and synchronization across services.
 - Celery Beat for scheduled updates
 - Integration with other services for consistency
 
-## Frontend - opensoft
+## Frontend - gc-frontend
 
 The frontend is built with **Next.js and TypeScript** and communicates with backend services via REST/gRPC APIs.
 
