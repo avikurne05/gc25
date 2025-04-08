@@ -13,6 +13,7 @@ The system consists of the following core components:
 3. **gc-report-backend**: Report generation service written in Python
 4. **gc-scheduler-backend**: Meeting scheduling service with asynchronous task processing
 5. **gc-update-backend**: Update management service with asynchronous task processing
+6. **gc-frontend**: Frontend built with Next.js and TypeScript
 
 ## Backend Services
 
@@ -56,14 +57,6 @@ A task scheduling and email notification system built with gRPC, Celery, Redis, 
 - Automatic retry mechanism for failed tasks
 - Scheduled tasks with Celery Beat
 
-**Architecture:**
-1. **gRPC Server**: Exposes endpoints and validates requests
-2. **Celery Workers**: Process tasks asynchronously
-3. **Redis**: Message broker for Celery
-4. **MongoDB**: Data persistence for tasks and user details
-5. **Email Template System**: Customizable HTML templates
-6. **Celery Beat**: Manages periodic task scheduling
-
 ### gc-update-backend
 
 Handles system updates and synchronization across services.
@@ -73,51 +66,57 @@ Handles system updates and synchronization across services.
 - Celery Beat for scheduled updates
 - Integration with other services for consistency
 
-## Running the Project
+## Frontend - opensoft
 
-### Prerequisites
+The frontend is built with **Next.js and TypeScript** and communicates with backend services via REST/gRPC APIs.
 
-Before running the project, ensure you have:
+**Key Features:**
+- Server-side rendering (SSR) and static site generation (SSG)
+- WebSocket support for real-time chat
+- Secure authentication integration with gc-auth-backend
+- Modern UI with React and Tailwind CSS
 
-1. Python 3.x installed
-2. Redis server running (for Celery)
-3. MongoDB running (for data persistence)
-4. A terminal emulator (xterm, konsole, terminator, or gnome-terminal)
+## Fully Dockerized Setup
 
-### Steps to Run the Shell Script
+All services are containerized using Docker, making deployment and development easier. The project uses `docker-compose` to orchestrate multiple containers.
 
-1. **Navigate to the project directory**:
+### Steps to Build and Run the Project Using Docker Compose
+
+1. **Clone the repository**:
    ```bash
-   cd /path/to/gc25
+   git clone https://github.com/your-repo/gc25.git
+   cd gc25
    ```
 
-2. **Make the script executable** (if not already):
+2. **Ensure Docker and Docker Compose are installed**.
+
+3. **Build and run the services**:
    ```bash
-   chmod +x start_backends.sh
+   docker-compose up --build -d
    ```
 
-3. **Run the script**:
+4. **Access the frontend**:  
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+5. **Access backend services**:  
+   The services are exposed on respective ports defined in `docker-compose.yml`.
+
+6. **Shut down services**:
    ```bash
-   ./start_backends.sh
+   docker-compose down
    ```
-
-4. **What happens when you run the script**:
-   - The script will set up virtual environments for each backend service
-   - It will install required dependencies from requirements.txt files
-   - It will launch each service in a separate terminal window
-   - For scheduler and update backends, it will start both Celery worker and beat processes
-
-5. **Monitoring**:
-   - After running the script, you'll have multiple terminal windows open
-   - Each window shows logs for a specific service
-   - Keep these terminals open to monitor the services
 
 ### Troubleshooting
 
-- If no terminal windows open, the script will display manual commands to run
-- If you encounter permission issues, ensure you have execute permissions for the script
-- If services fail to start, check that Redis and MongoDB are running
-- For dependency issues, check the terminal output for specific error messages
+- If any service fails, check logs using:
+  ```bash
+  docker-compose logs -f <service-name>
+  ```
+- If the frontend does not connect to the backend, ensure backend services are running correctly.
+- Restart containers if necessary:
+  ```bash
+  docker-compose restart
+  ```
 
 ## Communication Between Services
 
@@ -125,20 +124,26 @@ Services communicate primarily through gRPC, with protocol buffer definitions de
 
 ## Technology Stack
 
-- **Languages**: Python
-- **Communication**: gRPC
+- **Frontend**: Next.js with TypeScript
+- **Backend**: Python (FastAPI/Flask with gRPC)
 - **Task Processing**: Celery
 - **Message Broker**: Redis
 - **Database**: MongoDB
 - **ODM**: Beanie (for MongoDB)
-- **Web Framework**: Not explicitly stated, likely FastAPI or Flask
-- **Email**: SMTP for sending notifications
+- **WebSockets**: Socket.io/WebSockets for real-time updates
+- **Authentication**: JWT-based authentication
+- **Containerization**: Docker & Docker Compose
+- **Logging & Monitoring**: Prometheus & Grafana
 
 ## Development and Extension
 
 When developing or extending functionality:
 
-1. Ensure gRPC protocol buffers are synchronized across services
-2. Update Celery task definitions when adding new asynchronous operations
-3. Maintain MongoDB schema compatibility when changing data models
-4. Consider the distributed nature of the system when making changes
+1. Ensure gRPC protocol buffers are synchronized across services.
+2. Update Celery task definitions when adding new asynchronous operations.
+3. Maintain MongoDB schema compatibility when changing data models.
+4. Consider the distributed nature of the system when making changes.
+
+---
+
+This documentation provides a detailed overview of the project and instructions to get started with a fully Dockerized setup.
