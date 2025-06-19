@@ -1,9 +1,5 @@
 # GC25 Project Documentation
 
-## Deployment Link
-
-[http://52.66.116.15/](http://52.66.116.15/)
-
 ## Overview
 
 GC25 is a comprehensive system with multiple backend services communicating through gRPC. The project is designed for scheduling meetings, generating reports, handling chat functionality, and managing updates through an asynchronous architecture.
