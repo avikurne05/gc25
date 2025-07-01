@@ -7,7 +7,7 @@ import time
 DELAY = 1
 
 def analyze_employee_moods(json_path="moods.json", output_path="employee_questions.json"):
-    genai.configure(api_key="AIzaSyCgZCJFiOb_MbbkToFVG2brssKwimx87FE")
+    genai.configure(api_key="")
 
     QUESTION_BANK = {
         "I. Workload & Role Clarity": [
