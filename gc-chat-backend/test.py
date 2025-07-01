@@ -58,7 +58,7 @@ class SearchQuery(BaseModel):
 graph_builder = StateGraph(State)
 
 llm = ChatGoogleGenerativeAI(
-    api_key = "AIzaSyA04fnQ5LXREXSj7k3n4AH7KO1dijHEK5c",
+    api_key = "",
     model = "gemini-2.0-flash"
 )
 structured_llm = llm.with_structured_output(SearchQuery)
