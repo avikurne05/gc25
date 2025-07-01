@@ -16,10 +16,10 @@ import datetime
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-SENDER_EMAIL = "mrx.zttg@gmail.com"
-SENDER_PASSWORD = "gyoqrjhslvyknxec"
+SENDER_EMAIL = ""
+SENDER_PASSWORD = ""
 
-genai.configure(api_key="AIzaSyA04fnQ5LXREXSj7k3n4AH7KO1dijHEK5c")
+genai.configure(api_key="")
 model = genai.GenerativeModel(model_name="gemini-2.0-flash")
 
 def sendMail(to_email: str, subject: str, empName: str):
